@@ -5,13 +5,14 @@
 
 @section('content')
 
-<h1>Listagem dos usuários
+<h1 class="text-2x1 font-semibold leading-tigh py-2">
+    Listagem dos usuários
     (<a href="{{ route('users.create') }}">+</a>)
 </h1>
 
 <form action="{{ route('users.index') }}" method="get">
     <input type="text" name="search" id="Pesquisar">
-    <button>Pesquisar</button>
+    <button class="shadow bg-purple-500 hover:bg-purple-400">Pesquisar</button>
 </form>
 
 <ul>
