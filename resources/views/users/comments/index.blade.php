@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Listagem dos Usuarios')
+@section('title', "Comentarios do Usuário: {$user->name}")
     
 
 @section('content')
 
 <h1 class="text-2xl font-bold leading-tigh py-2 m-10">
-    Listagem dos usuários
-    <a href="{{ route('users.create') }}" class="bg-blue-900 rounded-full text-white px-4 text-sm">+</a>
+    Comentarios do Usuário: {{$user->name}}
+    <a href="{{ route('comments.create', $user->id) }}" class="bg-blue-900 rounded-full text-white px-4 text-sm">+</a>
 </h1>
 
 <form action="{{ route('users.index') }}" method="get" class="m-10">
@@ -18,36 +18,24 @@
 <table class="min-w-full leading-normal shadow-md rounded m-10">
     <thead>
         <tr>
-            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-left">
-                NOME
+            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center">
+                CONTEÚDO
             </th>
-            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-left">
-                E-MAIL
+            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center">
+                VISÍVEL
             </th>
             <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center">
                 EDITAR
             </th>
-            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center">
-                DETALHES
-            </th>
-            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center">
-                COMENTÁRIOS
-            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user)
+        @foreach ($comments as $comment)
         <tr>
-            <td class="p-5 border-b border-gray-300 text-left">{{ $user->name }}</td>
-            <td class="p-5 border-b border-gray-300 text-left">{{ $user->email }}</td>
+            <td class="p-5 border-b border-gray-300 text-left">{{ $comment->body }}</td>
+            <td class="p-5 border-b border-gray-300 text-center">{{ $comment->visible ? 'SIM' : 'NÃO'}}</td>
             <td class="text-center border-b border-gray-300">
                 <a class="bg-orange-300 hover:bg-orange-200 px-6 py-2 rounded-full" href="{{ route('users.edit', $user->id) }}">Editar</a>
-            </td>
-            <td class="text-center border-b border-gray-300">
-                <a  class="bg-green-300 hover:bg-green-200 px-6 py-2 rounded-full text-center" href="{{ route('users.show', $user->id) }}">Detalhes</a>
-            </td>
-            <td class="text-center border-b border-gray-300">
-                <a  class="bg-blue-300 hover:bg-blue-200 px-6 py-2 rounded-full text-center" href="{{ route('comments.index', $user->id) }}">Comentários (0)</a>
             </td>
         </tr>
         @endforeach
